@@ -39,7 +39,7 @@ const MyWishlistScreen = ({ navigation, route }) => {
     fetchWishlist();
     setRefreshing(false);
   };
-  
+
   const fetchWishlist = async () => {
     const value = await AsyncStorage.getItem("authUser");
     let user = JSON.parse(value);
@@ -132,11 +132,11 @@ const MyWishlistScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>My Wishlist</Text>
+          <Text style={styles.screenNameText}>Sản phẩm yêu thích</Text>
         </View>
         <View>
           <Text style={styles.screenNameParagraph}>
-            View , add or remove products from wishlist for later purchase
+            Xem, thêm hoặc xóa sản phẩm khỏi danh sách yêu thích để mua sau
           </Text>
         </View>
       </View>
@@ -144,7 +144,7 @@ const MyWishlistScreen = ({ navigation, route }) => {
       {wishlist.length == 0 ? (
         <View style={styles.ListContiainerEmpty}>
           <Text style={styles.secondaryTextSmItalic}>
-            "There are no product in wishlist yet."
+            "Chưa có sản phẩm nào trong danh sách yêu thích."
           </Text>
         </View>
       ) : (

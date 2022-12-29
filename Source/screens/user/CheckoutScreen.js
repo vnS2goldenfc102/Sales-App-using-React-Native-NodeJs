@@ -142,7 +142,7 @@ const CheckoutScreen = ({ navigation, route }) => {
         <View></View>
       </View>
       <ScrollView style={styles.bodyContainer} nestedScrollEnabled={true}>
-        <Text style={styles.primaryText}>Order Summary</Text>
+        <Text style={styles.primaryText}>Thứ tự</Text>
         <ScrollView
           style={styles.orderSummaryContainer}
           nestedScrollEnabled={true}
@@ -156,43 +156,43 @@ const CheckoutScreen = ({ navigation, route }) => {
             />
           ))}
         </ScrollView>
-        <Text style={styles.primaryText}>Total</Text>
+        <Text style={styles.primaryText}>Tổng</Text>
         <View style={styles.totalOrderInfoContainer}>
           <View style={styles.list}>
-            <Text>Order</Text>
+            <Text>Sản phẩm</Text>
             <Text>{totalCost}$</Text>
           </View>
           <View style={styles.list}>
-            <Text>Delivery</Text>
+            <Text>Vận chuyển</Text>
             <Text>{deliveryCost}$</Text>
           </View>
           <View style={styles.list}>
-            <Text style={styles.primaryTextSm}>Total</Text>
+            <Text style={styles.primaryTextSm}>Tổng</Text>
             <Text style={styles.secondaryTextSm}>
               {totalCost + deliveryCost}$
             </Text>
           </View>
         </View>
-        <Text style={styles.primaryText}>Contact</Text>
+        <Text style={styles.primaryText}>Liên hệ</Text>
         <View style={styles.listContainer}>
           <View style={styles.list}>
             <Text style={styles.secondaryTextSm}>Email</Text>
             <Text style={styles.secondaryTextSm}>
-              bukhtyar.haider1@gmail.com
+              lan118664@gmail.com
             </Text>
           </View>
           <View style={styles.list}>
-            <Text style={styles.secondaryTextSm}>Phone</Text>
-            <Text style={styles.secondaryTextSm}>+92 3410988683</Text>
+            <Text style={styles.secondaryTextSm}>Số điện thoại</Text>
+            <Text style={styles.secondaryTextSm}>+84 3410988683</Text>
           </View>
         </View>
-        <Text style={styles.primaryText}>Address</Text>
+        <Text style={styles.primaryText}>Địa chỉ</Text>
         <View style={styles.listContainer}>
           <TouchableOpacity
             style={styles.list}
             onPress={() => setModalVisible(true)}
           >
-            <Text style={styles.secondaryTextSm}>Address</Text>
+            <Text style={styles.secondaryTextSm}>Địa chỉ</Text>
             <View>
               {country || city || streetAddress != "" ? (
                 <Text
@@ -205,16 +205,16 @@ const CheckoutScreen = ({ navigation, route }) => {
                     : `${address.substring(0, 25)}...`}
                 </Text>
               ) : (
-                <Text style={styles.primaryTextSm}>Add</Text>
+                <Text style={styles.primaryTextSm}>Thêm</Text>
               )}
             </View>
           </TouchableOpacity>
         </View>
-        <Text style={styles.primaryText}>Payment</Text>
+        <Text style={styles.primaryText}>Thanh toán</Text>
         <View style={styles.listContainer}>
           <View style={styles.list}>
-            <Text style={styles.secondaryTextSm}>Method</Text>
-            <Text style={styles.primaryTextSm}>Cash On Delivery</Text>
+            <Text style={styles.secondaryTextSm}>Phương thức</Text>
+            <Text style={styles.primaryTextSm}>Thanh toán khi giao hàng</Text>
           </View>
         </View>
 
@@ -223,12 +223,12 @@ const CheckoutScreen = ({ navigation, route }) => {
       <View style={styles.buttomContainer}>
         {country && city && streetAddress != "" ? (
           <CustomButton
-            text={"Submit Order"}
+            text={"Xác nhận đặt hàng"}
             // onPress={() => navigation.replace("orderconfirm")}
             onPress={handleCheckout}
           />
         ) : (
-          <CustomButton text={"Submit Order"} disabled />
+          <CustomButton text={"Xác nhận đặt hàng"} disabled />
         )}
       </View>
       <Modal
@@ -244,22 +244,22 @@ const CheckoutScreen = ({ navigation, route }) => {
             <CustomInput
               value={country}
               setValue={setCountry}
-              placeholder={"Enter Country"}
+              placeholder={"Quốc gia"}
             />
             <CustomInput
               value={city}
               setValue={setCity}
-              placeholder={"Enter City"}
+              placeholder={"Thành phố"}
             />
             <CustomInput
               value={streetAddress}
               setValue={setStreetAddress}
-              placeholder={"Enter Street Address"}
+              placeholder={"Địa chỉ đường phố"}
             />
             <CustomInput
               value={zipcode}
               setValue={setZipcode}
-              placeholder={"Enter ZipCode"}
+              placeholder={"Nhập mã zip"}
               keyboardType={"number-pad"}
             />
             {streetAddress || city || country != "" ? (
@@ -268,14 +268,14 @@ const CheckoutScreen = ({ navigation, route }) => {
                   setModalVisible(!modalVisible);
                   setAddress(`${streetAddress}, ${city},${country}`);
                 }}
-                text={"save"}
+                text={"Lưu lại"}
               />
             ) : (
               <CustomButton
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}
-                text={"close"}
+                text={"Đóng"}
               />
             )}
           </View>

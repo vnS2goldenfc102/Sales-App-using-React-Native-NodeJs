@@ -71,7 +71,7 @@ const MyOrderScreen = ({ navigation, route }) => {
       headers: myHeaders,
       redirect: "follow",
     };
-    console.log("sadsads",requestOptions);
+    console.log("sadsads", requestOptions);
     setIsloading(true);
     fetch(`${network.serverip}/orders/${user._id}`, requestOptions)
       .then((response) => response.json())
@@ -120,11 +120,11 @@ const MyOrderScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>My Orders</Text>
+          <Text style={styles.screenNameText}>Đơn đặt hàng của tôi</Text>
         </View>
         <View>
           <Text style={styles.screenNameParagraph}>
-            Your order and your order status
+            Đơn hàng của bạn và trạng thái đơn hàng của bạn
           </Text>
         </View>
       </View>
@@ -132,7 +132,7 @@ const MyOrderScreen = ({ navigation, route }) => {
       {orders.length == 0 ? (
         <View style={styles.ListContiainerEmpty}>
           <Text style={styles.secondaryTextSmItalic}>
-            "There are no orders placed yet."
+            "Không có đơn đặt hàng nào được nêu ra."
           </Text>
         </View>
       ) : (

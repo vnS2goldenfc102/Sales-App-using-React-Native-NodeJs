@@ -31,7 +31,7 @@ const SignupScreen = ({ navigation }) => {
     email: email,
     password: password,
     name: name,
-    userType: "USER",
+    // userType: "USER",
   });
 
   var requestOptions = {
@@ -40,29 +40,28 @@ const SignupScreen = ({ navigation }) => {
     body: raw,
     redirect: "follow",
   };
-  
+
   const signUpHandle = () => {
-    console.log(email, name)
     if (email == "") {
-      return setError("Please enter your email");
+      return setError("Vui lòng nhập email của bạn");
     }
     if (name == "") {
-      return setError("Please enter your name");
+      return setError("Xin hãy nhập tên của bạn");
     }
     if (password == "") {
-      return setError("Please enter your password");
+      return setError("Vui lòng nhập mật khẩu của bạn");
     }
     if (!email.includes("@")) {
-      return setError("Email is not valid");
+      return setError("Email không hợp lệ");
     }
     if (email.length < 6) {
-      return setError("Email is too short");
+      return setError("Email quá ngắn");
     }
     if (password.length < 5) {
-      return setError("Password must be 6 characters long");
+      return setError("Mật khẩu phải dài 6 ký tự");
     }
     if (password != confirmPassword) {
-      return setError("password does not match");
+      return setError("mật khẩu không hợp lệ");
     }
     fetch(network.serverip + "/register", requestOptions)
       .then((response) => response.json())
@@ -102,12 +101,11 @@ const SignupScreen = ({ navigation }) => {
           </View>
           <View style={styles.screenNameContainer}>
             <View>
-              <Text style={styles.screenNameText}>Sign up</Text>
+              <Text style={styles.screenNameText}>Đăng ký</Text>
             </View>
             <View>
               <Text style={styles.screenNameParagraph}>
-                Create your account on EasyBuy to get an access to millions of
-                products
+              Tạo tài khoản của bạn trên HLT để có quyền truy cập vào hàng triệu sản phẩm 
               </Text>
             </View>
           </View>
@@ -116,7 +114,7 @@ const SignupScreen = ({ navigation }) => {
             <CustomInput
               value={name}
               setValue={setName}
-              placeholder={"Name"}
+              placeholder={"Tên"}
               placeholderTextColor={colors.muted}
               radius={5}
             />
@@ -131,7 +129,7 @@ const SignupScreen = ({ navigation }) => {
               value={password}
               setValue={setPassword}
               secureTextEntry={true}
-              placeholder={"Password"}
+              placeholder={"Mật khẩu"}
               placeholderTextColor={colors.muted}
               radius={5}
             />
@@ -139,22 +137,22 @@ const SignupScreen = ({ navigation }) => {
               value={confirmPassword}
               setValue={setConfirmPassword}
               secureTextEntry={true}
-              placeholder={"Confirm Password"}
+              placeholder={"Xác nhận mật khẩu"}
               placeholderTextColor={colors.muted}
               radius={5}
             />
           </View>
         </ScrollView>
         <View style={styles.buttomContainer}>
-          <CustomButton text={"Sign up"} onPress={signUpHandle} />
+          <CustomButton text={"Đăng ký"} onPress={signUpHandle} />
         </View>
         <View style={styles.bottomContainer}>
-          <Text>Already have an account?</Text>
+          <Text>Bạn đã tạo tài khoản rồi?</Text>
           <Text
             onPress={() => navigation.navigate("login")}
             style={styles.signupText}
           >
-            Login
+            Đăng nhập
           </Text>
         </View>
       </KeyboardAvoidingView>

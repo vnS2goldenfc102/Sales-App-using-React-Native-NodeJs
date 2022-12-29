@@ -129,7 +129,7 @@ const HomeScreen = ({ navigation, route }) => {
         </TouchableOpacity>
         <View style={styles.topbarlogoContainer}>
           <Image source={easybuylogo} style={styles.logo} />
-          <Text style={styles.toBarText}>EasyBuy</Text>
+          <Text style={styles.toBarText}>HLT</Text>
         </View>
         <TouchableOpacity
           style={styles.cartIconContainer}
@@ -237,7 +237,7 @@ const HomeScreen = ({ navigation, route }) => {
           {products.length === 0 ? (
             <View style={styles.productCardContainerEmpty}>
               <Text style={styles.productCardContainerEmptyText}>
-                No Product
+                Không có sản phẩm
               </Text>
             </View>
           ) : (
@@ -414,7 +414,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   productCardContainerEmpty: {
-    padding: 10,
+    
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -425,6 +425,8 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   productCardContainerEmptyText: {
+    marginRight: 15,
+    paddingBottom: 50,
     fontSize: 15,
     fontStyle: "italic",
     color: colors.muted,

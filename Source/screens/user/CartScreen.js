@@ -70,8 +70,8 @@ const CartScreen = ({ navigation }) => {
             />
           </TouchableOpacity>
           <View style={styles.cartInfoTopBar}>
-            <Text>Your Cart</Text>
-            <Text>{cartproduct.length} Items</Text>
+            <Text>Giỏ hàng của bạn</Text>
+            <Text>{cartproduct.length} vật phẩm</Text>
           </View>
         </View>
 
@@ -86,7 +86,7 @@ const CartScreen = ({ navigation }) => {
             source={CartEmpty}
             style={{ height: 400, resizeMode: "contain" }}
           /> */}
-          <Text style={styles.secondaryTextSmItalic}>"Cart is empty"</Text>
+          <Text style={styles.secondaryTextSmItalic}>"Giỏ hàng trống"</Text>
         </View>
       ) : (
         <ScrollView style={styles.cartProductListContiainer}>
@@ -126,19 +126,19 @@ const CartScreen = ({ navigation }) => {
             />
           </View>
           <View>
-            <Text style={styles.cartBottomPrimaryText}>Total</Text>
+            <Text style={styles.cartBottomPrimaryText}>Tổng</Text>
             <Text style={styles.cartBottomSecondaryText}>{totalPrice}$</Text>
           </View>
         </View>
         <View style={styles.cartBottomRightContainer}>
           {cartproduct.length > 0 ? (
             <CustomButton
-              text={"Checkout"}
+              text={"Thanh toán"}
               onPress={() => navigation.navigate("checkout")}
             />
           ) : (
             <CustomButton
-              text={"Checkout"}
+              text={"Thanh toán"}
               disabled={true}
               onPress={() => navigation.navigate("checkout")}
             />

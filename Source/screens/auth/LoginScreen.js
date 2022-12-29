@@ -35,9 +35,8 @@ const LoginScreen = ({ navigation }) => {
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  // myHeaders.append("authorization", "Bearer $")
+
   var raw = JSON.stringify({
-    // name: name,
     email: email.trim(),
     password: password,
   });
@@ -55,41 +54,37 @@ const LoginScreen = ({ navigation }) => {
     // if email does not contain @ sign
     if (email == "") {
       setIsloading(false);
-      return setError("Please enter your email");
+      return setError("Vui lòng nhập email của bạn");
     }
     if (password == "") {
       setIsloading(false);
-      return setError("Please enter your password");
+      return setError("Vui lòng nhập mật khẩu của bạn");
     }
     if (!email.includes("@")) {
       setIsloading(false);
-      return setError("Email is not valid");
+      return setError("Email không hợp lệ");
     }
     // length of email must be greater than 5 characters
     if (email.length < 6) {
       setIsloading(false);
-      return setError("Email is too short");
+      return setError("Email quá ngắn");
     }
     // length of password must be greater than 5 characters
     if (password.length < 6) {
       setIsloading(false);
-      return setError("Password must be 6 characters long");
+      return setError("Mật khẩu phải dài 6 ký tự");
     }
 
     fetch(network.serverip + "/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        if (
-          result.status == 200
-        ) {
-          alert(result.data.userType)
-          if (result.data.userType == "ADMIN") {
+        if (result.status == 200 ) {
+          if (result?.data?.userType == "ADMIN") {
             _storeData(result.data);
             setIsloading(false);
             navigation.replace("dashboard", { authUser: result.data });
           } else {
             _storeData(result.data);
-
             setIsloading(false);
             navigation.replace("tab", { user: result.data });
           }
@@ -103,8 +98,7 @@ const LoginScreen = ({ navigation }) => {
         console.log("error", setError(error.message));
       });
   };
-  // const value = AsyncStorage.getItem("authUser");
-  // console.error(value)
+
   return (
     <InternetConnectionAlert
       onChange={(connectionState) => {
@@ -120,9 +114,9 @@ const LoginScreen = ({ navigation }) => {
           <StatusBar></StatusBar>
           <View style={styles.welconeContainer}>
             <View>
-              <Text style={styles.welcomeText}>Welcome to EasyBuy</Text>
+              <Text style={styles.welcomeText}>HLT</Text>
               <Text style={styles.welcomeParagraph}>
-                make your ecommerce easy
+              Chào mừng bạn 
               </Text>
             </View>
             <View>
@@ -130,14 +124,14 @@ const LoginScreen = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.screenNameContainer}>
-            <Text style={styles.screenNameText}>Login</Text>
+            <Text style={styles.screenNameText}>Đăng nhập</Text>
           </View>
           <View style={styles.formContainer}>
             <CustomAlert message={error} type={"error"} />
             <CustomInput
               value={email}
               setValue={setEmail}
-              placeholder={"Username"}
+              placeholder={"Tên tài khoản"}
               placeholderTextColor={colors.muted}
               radius={5}
             />
@@ -145,7 +139,7 @@ const LoginScreen = ({ navigation }) => {
               value={password}
               setValue={setPassword}
               secureTextEntry={true}
-              placeholder={"Password"}
+              placeholder={"Mật khẩu"}
               placeholderTextColor={colors.muted}
               radius={5}
             />
@@ -154,21 +148,21 @@ const LoginScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate("forgetpassword")}
                 style={styles.ForgetText}
               >
-                Forget Password?
+                Quên mật khẩu?
               </Text>
             </View>
           </View>
         </ScrollView>
         <View style={styles.buttomContainer}>
-          <CustomButton text={"Login"} onPress={loginHandle} />
+          <CustomButton text={"Đăng nhập"} onPress={loginHandle} />
         </View>
         <View style={styles.bottomContainer}>
-          <Text>Don't have an account?</Text>
+          <Text>Không có tài khoản?</Text>
           <Text
             onPress={() => navigation.navigate("signup")}
             style={styles.signupText}
           >
-            signup
+            Đăng ký
           </Text>
         </View>
       </KeyboardAvoidingView>

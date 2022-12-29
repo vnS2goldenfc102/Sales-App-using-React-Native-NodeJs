@@ -21,8 +21,8 @@ const MyAccountScreen = ({ navigation, route }) => {
 
   const showConfirmDialog = (id) => {
     return Alert.alert(
-      "Are your sure?",
-      "Are you sure you want to remove your account?",
+      "Bạn có chắc không?",
+      "Bạn có chắc chắn muốn xóa tài khoản của mình không?",
       [
         {
           text: "Yes",
@@ -76,7 +76,7 @@ const MyAccountScreen = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.screenNameContainer}>
-        <Text style={styles.screenNameText}>My Account</Text>
+        <Text style={styles.screenNameText}>Tài khoản của tôi</Text>
       </View>
       <View style={styles.UserProfileCardContianer}>
         <UserProfileCard
@@ -87,7 +87,7 @@ const MyAccountScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.OptionsContainer}>
         <OptionList
-          text={"Change Password"}
+          text={"Đổi mật khẩu"}
           Icon={Ionicons}
           iconName={"key-sharp"}
           onPress={() =>
@@ -97,7 +97,7 @@ const MyAccountScreen = ({ navigation, route }) => {
           }
         />
         <OptionList
-          text={"Delete My Account"}
+          text={"Xoá tài khoản"}
           Icon={MaterialIcons}
           iconName={"delete"}
           type={"danger"}

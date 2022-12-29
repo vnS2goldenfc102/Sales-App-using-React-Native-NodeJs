@@ -26,7 +26,7 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [statusDisable, setStatusDisable] = useState(false);
-  const labels = ["Processing", "Shipping", "Delivery"];
+  const labels = ["Xử lý", "Đang chuyển hàng", "Vận chuyển"];
   const [trackingState, setTrackingState] = useState(1);
   const customStyles = {
     stepIndicatorSize: 25,
@@ -89,10 +89,10 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
     setValue(orderDetail?.status);
     setAddress(
       orderDetail?.country +
-        ", " +
-        orderDetail?.city +
-        ", " +
-        orderDetail?.shippingAddress
+      ", " +
+      orderDetail?.city +
+      ", " +
+      orderDetail?.shippingAddress
     );
     setTotalCost(
       orderDetail?.items.reduce((accumulator, object) => {
@@ -131,7 +131,7 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
         </View>
         <View>
           <Text style={styles.screenNameParagraph}>
-            View all detail about order
+            Xem tất cả chi tiết về đơn hàng
           </Text>
         </View>
       </View>
@@ -142,7 +142,7 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
       >
         <View style={styles.containerNameContainer}>
           <View>
-            <Text style={styles.containerNameText}>Shipping Address</Text>
+            <Text style={styles.containerNameText}>Địa chỉ giao hàng</Text>
           </View>
         </View>
         <View style={styles.ShipingInfoContainer}>
@@ -150,23 +150,23 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
           <Text style={styles.secondarytextSm}>{orderDetail?.zipcode}</Text>
         </View>
         <View>
-          <Text style={styles.containerNameText}>Order Info</Text>
+          <Text style={styles.containerNameText}>Thông tin đặt hàng</Text>
         </View>
         <View style={styles.orderInfoContainer}>
           <Text style={styles.secondarytextMedian}>
-            Order # {orderDetail?.orderId}
+            Đơn đặt hàng # {orderDetail?.orderId}
           </Text>
           <Text style={styles.secondarytextSm}>
-            Ordered on {dateFormat(orderDetail?.updatedAt)}
+            Đã đặt vào {dateFormat(orderDetail?.updatedAt)}
           </Text>
           {orderDetail?.shippedOn && (
             <Text style={styles.secondarytextSm}>
-              Shipped on {orderDetail?.shippedOn}
+              Vận chuyển trên {orderDetail?.shippedOn}
             </Text>
           )}
           {orderDetail?.deliveredOn && (
             <Text style={styles.secondarytextSm}>
-              Delivered on {orderDetail?.deliveredOn}
+              Giao hàng trên {orderDetail?.deliveredOn}
             </Text>
           )}
           <View style={{ marginTop: 15, width: "100%" }}>
@@ -181,17 +181,17 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
 
         <View style={styles.containerNameContainer}>
           <View>
-            <Text style={styles.containerNameText}>Package Details</Text>
+            <Text style={styles.containerNameText}>Chi tiết gói</Text>
           </View>
         </View>
         <View style={styles.orderItemsContainer}>
           <View style={styles.orderItemContainer}>
-            <Text style={styles.orderItemText}>Package</Text>
+            <Text style={styles.orderItemText}>Bưu kiện</Text>
             <Text>{value}</Text>
           </View>
           <View style={styles.orderItemContainer}>
             <Text style={styles.orderItemText}>
-              Order on : {orderDetail?.updatedAt}
+              Đặt hàng trên : {orderDetail?.updatedAt}
             </Text>
           </View>
           <ScrollView
@@ -209,7 +209,7 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
             ))}
           </ScrollView>
           <View style={styles.orderItemContainer}>
-            <Text style={styles.orderItemText}>Total</Text>
+            <Text style={styles.orderItemText}>Tổng</Text>
             <Text>{totalCost}$</Text>
           </View>
         </View>

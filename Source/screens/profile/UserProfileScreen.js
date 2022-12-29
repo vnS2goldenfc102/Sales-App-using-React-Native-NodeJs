@@ -36,7 +36,7 @@ const UserProfileScreen = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.screenNameContainer}>
-        <Text style={styles.screenNameText}>Profile</Text>
+        <Text style={styles.screenNameText}>Hồ sơ</Text>
       </View>
       <View style={styles.UserProfileCardContianer}>
         <UserProfileCard
@@ -47,13 +47,13 @@ const UserProfileScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.OptionsContainer}>
         <OptionList
-          text={"My Account"}
+          text={"Tài khoản của tôi"}
           Icon={Ionicons}
           iconName={"person"}
           onPress={() => navigation.navigate("myaccount", { user: userInfo })}
         />
         <OptionList
-          text={"Wishlist"}
+          text={"Danh sách yêu thích"}
           Icon={Ionicons}
           iconName={"heart"}
           onPress={() => navigation.navigate("mywishlist", { user: userInfo })}
@@ -71,7 +71,7 @@ const UserProfileScreen = ({ navigation, route }) => {
           onPress={() => console.log("working....")}
         /> */}
         <OptionList
-          text={"Logout"}
+          text={"Đăng xuất"}
           Icon={Ionicons}
           iconName={"log-out"}
           onPress={async () => {

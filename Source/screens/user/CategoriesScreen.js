@@ -164,7 +164,7 @@ const CategoriesScreen = ({ navigation, route }) => {
         <View style={{ padding: 0, paddingLeft: 20, paddingRight: 20 }}>
           <CustomInput
             radius={5}
-            placeholder={"Search..."}
+            placeholder={"Tìm kiếm..."}
             value={filterItem}
             setValue={setFilterItem}
           />

@@ -62,6 +62,7 @@ module.exports.login = async (req, res) => {
               const data = await userModel.findById(check._id).select("-password")
               const token = jwt.sign({ data }, 'secret', { expiresIn: '15m' })
               data.token = token
+              console.log(data)
               res.send({ data, message: 'Đăng nhập thành công', status: 200 })
           } else {
               res.send({ passwordErrMess: 'Sai mật khẩu' })
@@ -111,6 +112,7 @@ module.exports.register = async (req, res) => {
       } else {
           const encryptPassword = await bcrypt.hash(password, 10)
           const registerAcc = await userModel.create({ name: name, email: email, password: encryptPassword })
+          console.log(registerAcc)
           res.send({ success: true, registerAcc, messageSuccess: 'Tạo tài khoản thành công' })
       }
   } catch (error) {
@@ -123,6 +125,7 @@ module.exports.updateUser = async (req, res) => {
 
     const userDataToBeUpdated = req.body;
     const { id } = req.query;
+    console.log(id)
     const user = await userModel.findOne({ _id: id });
 
     if (!user) return res.send("người dùng không tồn tại");

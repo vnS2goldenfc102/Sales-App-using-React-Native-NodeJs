@@ -237,15 +237,15 @@ const ProductDetailScreen = ({ navigation, route }) => {
             </View>
             <View style={styles.productDetailContainer}>
               <View style={styles.productSizeOptionContainer}>
-                {/* <Text style={styles.secondaryTextSm}>Size:</Text> */}
+                {/* <Text style={styles.secondaryTextSm}>Số lượng:</Text> */}
               </View>
               <View style={styles.productPriceContainer}>
-                <Text style={styles.secondaryTextSm}>Price:</Text>
+                <Text style={styles.secondaryTextSm}>Giá:</Text>
                 <Text style={styles.primaryTextSm}>{product?.price}$</Text>
               </View>
             </View>
             <View style={styles.productDescriptionContainer}>
-              <Text style={styles.secondaryTextSm}>Description:</Text>
+              <Text style={styles.secondaryTextSm}>Mô tả:</Text>
               <Text>{product?.description}</Text>
             </View>
           </View>
@@ -274,13 +274,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
             <View style={styles.productButtonContainer}>
               {avaiableQuantity > 0 ? (
                 <CustomButton
-                  text={"Add to Cart"}
+                  text={"Thêm vào giỏ hàng"}
                   onPress={() => {
                     handleAddToCat(product);
                   }}
                 />
               ) : (
-                <CustomButton text={"Out of Stock"} disabled={true} />
+                <CustomButton text={"Hết hàng"} disabled={true} />
               )}
             </View>
           </View>

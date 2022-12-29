@@ -31,9 +31,9 @@ const UpdatePasswordScreen = ({ navigation, route }) => {
   const updatePasswordHandle = () => {
     console.log(userID);
     if (currnetPassword == newPassword) {
-      setError("You are not allowed to set the previous used password");
+      setError("Bạn không được phép đặt mật khẩu đã sử dụng trước đó");
     } else if (newPassword != confirmPassword) {
-      setError("Password not matched");
+      setError("Mật khẩu không khớp");
     } else {
       setError("");
       fetch(
@@ -66,11 +66,11 @@ const UpdatePasswordScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>Update Password</Text>
+          <Text style={styles.screenNameText}>Cập nhật mật khẩu</Text>
         </View>
         <View>
           <Text style={styles.screenNameParagraph}>
-            Your new password must be different from previous used password
+          Mật khẩu mới của bạn phải khác với mật khẩu đã sử dụng trước đó
           </Text>
         </View>
       </View>
@@ -79,24 +79,24 @@ const UpdatePasswordScreen = ({ navigation, route }) => {
         <CustomInput
           value={currnetPassword}
           setValue={setCurrentPassword}
-          placeholder={"Current Password"}
+          placeholder={"Mật khẩu hiện tại"}
           secureTextEntry={true}
         />
         <CustomInput
           value={newPassword}
           setValue={setNewPassword}
-          placeholder={"New Password"}
+          placeholder={"Mật khẩu mới"}
           secureTextEntry={true}
         />
         <CustomInput
           value={confirmPassword}
           setValue={setCconfirmPassword}
-          placeholder={"Confirm New Password"}
+          placeholder={"Xác nhận mật khẩu mới"}
           secureTextEntry={true}
         />
       </View>
       <CustomButton
-        text={"Update Password"}
+        text={"Cập nhật mật khẩu"}
         onPress={updatePasswordHandle}
         radius={5}
       />

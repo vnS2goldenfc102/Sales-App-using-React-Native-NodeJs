@@ -56,7 +56,7 @@ const OrderList = ({ item, onPress }) => {
     <View style={styles.container}>
       <View style={styles.innerRow}>
         <View>
-          <Text style={styles.primaryText}>Order # {item?.orderId}</Text>
+          <Text style={styles.primaryText}>Đơn đặt hàng # {item?.orderId}</Text>
         </View>
         <View style={styles.timeDateContainer}>
           <Text style={styles.secondaryTextSm}>
@@ -76,12 +76,12 @@ const OrderList = ({ item, onPress }) => {
         </View>
       )}
       <View style={styles.innerRow}>
-        <Text style={styles.secondaryText}>Quantity : {quantity}</Text>
-        <Text style={styles.secondaryText}>Total Amount : {totalCost}$</Text>
+        <Text style={styles.secondaryText}>Số lượng : {quantity}</Text>
+        <Text style={styles.secondaryText}>Tổng tiền : {totalCost}$</Text>
       </View>
       <View style={styles.innerRow}>
         <TouchableOpacity style={styles.detailButton} onPress={onPress}>
-          <Text>Details</Text>
+          <Text>Chi tiết</Text>
         </TouchableOpacity>
         <Text style={styles.secondaryText}>{item?.status}</Text>
       </View>
