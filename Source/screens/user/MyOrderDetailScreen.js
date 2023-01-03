@@ -127,7 +127,7 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>Order Detials</Text>
+          <Text style={styles.screenNameText}>Chi tiết đơn hàng</Text>
         </View>
         <View>
           <Text style={styles.screenNameParagraph}>

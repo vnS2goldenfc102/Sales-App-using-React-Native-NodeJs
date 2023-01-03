@@ -62,7 +62,6 @@ module.exports.login = async (req, res) => {
               const data = await userModel.findById(check._id).select("-password")
               const token = jwt.sign({ data }, 'secret', { expiresIn: '15m' })
               data.token = token
-              console.log(data)
               res.send({ data, message: 'Đăng nhập thành công', status: 200 })
           } else {
               res.send({ passwordErrMess: 'Sai mật khẩu' })

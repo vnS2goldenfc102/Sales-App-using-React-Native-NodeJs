@@ -59,25 +59,25 @@ const CategoriesScreen = ({ navigation, route }) => {
   const category = [
     {
       _id: "62fe244f58f7aa8230817f89",
-      title: "Nhẫn",
-      image: require("../../assets/icons/ring-removebg-preview.png"),
+      title: "May mặc",
+      image: require("../../assets/icons/garments.png"),
     },
     {
       _id: "62fe243858f7aa8230817f86",
-      title: "Bông tai",
-      image: require("../../assets/icons/earning-removebg-preview.png"),
+      title: "Điện tử",
+      image: require("../../assets/icons/electronics.png"),
     },
     {
-      _id: "63a27aa596f7b743b0ebbe2b",
-      title: "Lắc - Vòng",
-      image: require("../../assets/icons/bangless-removebg-preview.png"),
+      _id: "62fe241958f7aa8230817f83",
+      title: "Mỹ phẩm",
+      image: require("../../assets/icons/cosmetics.png"),
     },
     {
       _id: "62fe246858f7aa8230817f8c",
-      title: "Dây chuyền",
-      image: require("../../assets/icons/necklace-removebg-preview.png"),
+      title: "Tạp hóa",
+      image: require("../../assets/icons/grocery.png"),
     },
-  ];
+  ];  
   const [selectedTab, setSelectedTab] = useState(category[0]);
 
   const fetchProduct = () => {
