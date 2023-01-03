@@ -61,7 +61,7 @@ const SignupScreen = ({ navigation }) => {
       return setError("Mật khẩu phải dài 6 ký tự");
     }
     if (password != confirmPassword) {
-      return setError("mật khẩu không hợp lệ");
+      return setError("Mật khẩu không hợp lệ");
     }
     fetch(network.serverip + "/register", requestOptions)
       .then((response) => response.json())
@@ -69,7 +69,7 @@ const SignupScreen = ({ navigation }) => {
         console.log(result);
         if (result.success == true) {
           navigation.navigate("login");
-          alert(result.messageSuccess);
+          alert(result.message);
         }
       })
       .catch((error) => console.log("error", setError(error.message)));

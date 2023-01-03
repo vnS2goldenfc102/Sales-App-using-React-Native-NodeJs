@@ -64,10 +64,10 @@ module.exports.login = async (req, res) => {
               data.token = token
               res.send({ data, message: 'Đăng nhập thành công', status: 200 })
           } else {
-              res.send({ passwordErrMess: 'Sai mật khẩu' })
+              res.send({ message: 'Sai mật khẩu' })
           }
       } else {
-          res.send({ userNameErrMess: 'Tên đăng nhập không tồn tại' })
+          res.send({ message: 'Tên đăng nhập không tồn tại' })
       }
   } catch (error) {
       res.send({ message: 'Lỗi rồi' })
@@ -107,12 +107,12 @@ module.exports.register = async (req, res) => {
       console.log(name ,email )
       const check = await userModel.findOne({ email })
       if (check) {
-          res.send({ messageFailure: 'Tài khoản đã tồn tại' })
+          res.send({ message: 'Tài khoản đã tồn tại' })
       } else {
           const encryptPassword = await bcrypt.hash(password, 10)
           const registerAcc = await userModel.create({ name: name, email: email, password: encryptPassword })
           console.log(registerAcc)
-          res.send({ success: true, registerAcc, messageSuccess: 'Tạo tài khoản thành công' })
+          res.send({ success: true, registerAcc, message: 'Tạo tài khoản thành công' })
       }
   } catch (error) {
       res.send({ message: 'Lỗi rồi' })
@@ -127,7 +127,7 @@ module.exports.updateUser = async (req, res) => {
     console.log(id)
     const user = await userModel.findOne({ _id: id });
 
-    if (!user) return res.send("người dùng không tồn tại");
+    if (!user) return res.send({message: "Người dùng không tồn tại"});
 
     let updatedUser = await userModel.findOneAndUpdate(
       { _id: id },
@@ -137,7 +137,7 @@ module.exports.updateUser = async (req, res) => {
 
     return res.json({
       success: true,
-      message: "người dùng đã cập nhật thành công",
+      message: "Người dùng đã cập nhật thành công",
       data: updatedUser,
     });
   } catch (error) {
@@ -150,13 +150,13 @@ module.exports.deleteUser = async (req, res) => {
     const { id } = req.query;
 
     const user = await userModel.findOne({ _id: id });
-    if (!user) return res.status(200).send("người dùng không tồn tại");
+    if (!user) return res.status(200).send({ message: "Người dùng không tồn tại" });
 
     await userModel.findOneAndDelete({ _id: id });
     
     return res.json({
       success: true,
-      message: "người dùng đã xóa thành công",
+      message: "Người dùng đã xóa thành công",
     });
   } catch (error) {
     return res.status(400).send(error.message);
@@ -168,11 +168,11 @@ module.exports.userById = async (req, res) => {
     const { id } = req.query;
 
     const user = await userModel.findOne({_id : id})
-    if(!user) return res.send("người dùng không tồn tại")
+    if(!user) return res.send({ message: "Người dùng không tồn tại"})
 
     return res.json({
         success : true,
-        message : "người dùng đã xóa thành công",
+        message : "Người dùng đã xóa thành công",
         data : user
     })
 
@@ -191,7 +191,7 @@ module.exports.resetPassword = async (req, res) => {
     
         let user = await userModel.findOne({_id : id})
     
-        if(!user) return res.send("người dùng không tồn tại")
+        if(!user) return res.send({ message: "Người dùng không tồn tại" })
     
         // comparing the password from the password in DB to allow changes
         if(bcrypt.compare(password, user?.password)){
@@ -206,7 +206,7 @@ module.exports.resetPassword = async (req, res) => {
 
         return res.json({
             success : false,
-            message : "sai mật khẩu"
+            message : "Sai mật khẩu"
         })
 
     }catch(error){

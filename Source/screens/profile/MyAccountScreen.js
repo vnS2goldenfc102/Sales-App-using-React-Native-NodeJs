@@ -52,7 +52,7 @@ const MyAccountScreen = ({ navigation, route }) => {
       .then((result) => {
         if (result.success == true) {
           console.log(result.data);
-          navigation.goBack();
+          navigation.navigate('login');
         } else {
           setError(result.message);
         }

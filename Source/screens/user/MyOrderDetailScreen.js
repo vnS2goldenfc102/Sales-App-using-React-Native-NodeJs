@@ -210,7 +210,7 @@ const MyOrderDetailScreen = ({ navigation, route }) => {
           </ScrollView>
           <View style={styles.orderItemContainer}>
             <Text style={styles.orderItemText}>Tổng</Text>
-            <Text>{totalCost}$</Text>
+            <Text>₫{totalCost}</Text>
           </View>
         </View>
         <View style={styles.emptyView}></View>

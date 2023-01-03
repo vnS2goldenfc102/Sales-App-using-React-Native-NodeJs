@@ -62,7 +62,6 @@ const MyWishlistScreen = ({ navigation, route }) => {
           setWishlist(result.data.wishlist);
           setError("");
         }
-        console.log('first', result)
         setIsloading(false);
       })
       .catch((error) => {
@@ -72,16 +71,16 @@ const MyWishlistScreen = ({ navigation, route }) => {
       });
   };
 
-  const handleRemoveFromWishlist = (id) => {
+  const handleRemoveFromWishlist = (index) => {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", user.token);
     var requestOptions = {
-      method: "GET",
+      method: "DELETE",
       headers: myHeaders,
       redirect: "follow",
     };
 
-    fetch(`${network.serverip}/remove-from-wishlist/${id}`, requestOptions)
+    fetch(`${network.serverip}/remove-from-wishlist?id=${user._id}&index=${index}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.success) {
@@ -167,7 +166,7 @@ const MyWishlistScreen = ({ navigation, route }) => {
                 key={index}
                 onPressView={() => handleView(list?.productId)}
                 onPressRemove={() =>
-                  handleRemoveFromWishlist(list?.productId?._id)
+                  handleRemoveFromWishlist(index)
                 }
               />
             );

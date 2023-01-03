@@ -26,7 +26,7 @@ const ProductCard = ({
             0,
             10
           )}..`}</Text>
-          <Text style={styles.primaryTextSm}>{price}$</Text>
+          <Text style={styles.primaryTextSm}>₫{price}</Text>
         </View>
         <View>
           {quantity > 0 ? (

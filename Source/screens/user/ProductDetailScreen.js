@@ -43,39 +43,35 @@ const ProductDetailScreen = ({ navigation, route }) => {
   const [alertType, setAlertType] = useState("error");
 
   const fetchWishlist = async () => {
-    // const value = await AsyncStorage.getItem("authUser");
-    // let user = JSON.parse(value);
+    const value = await AsyncStorage.getItem("authUser");
+    let user = JSON.parse(value);
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", user.token);
 
     var requestOptions = {
-      method: "GET",
+      method: "POST",
       headers: myHeaders,
-      body: user,
       redirect: "follow",
     };
-    fetch(`${network.serverip}/wishlist`, requestOptions)
+    fetch(`${network.serverip}/wishlist/${user._id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        alert(result.data[0].wishlist);
         if (result?.err === "jwt expired") {
           logout();
         }
         if (result.success) {
-          setWishlistItems(result.data[0].wishlist);
+          setWishlistItems(result.data.wishlist);
           setIsDisbale(false);
-          result.data[0].wishlist.map((item) => {
-            if (item?.productId === product?._id) {
+          result.data.wishlist.map((item) => {
+            if (item?.productId._id === product?._id) {
               setOnWishlist(true);
             }
           });
-
           setError("");
         }
       })
       .catch((error) => {
         setError(error.message);
-        console.log("error", error);
       });
   };
 
@@ -100,15 +96,12 @@ const ProductDetailScreen = ({ navigation, route }) => {
       myHeaders.append("x-auth-token", user.token);
 
       var requestOptions = {
-        method: "GET",
+        method: "DELETE",
         headers: myHeaders,
         redirect: "follow",
       };
 
-      fetch(
-        `${network.serverip}/remove-from-wishlist?id=${product?._id}`,
-        requestOptions
-      )
+      fetch(`${network.serverip}/remove-from-wishlist?id=${user._id}&index=${-1}`, requestOptions)
         .then((response) => response.json())
         .then((result) => {
           if (result.success) {
@@ -150,7 +143,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
       fetch(`${network.serverip}/add-to-wishlist`, addrequestOptions)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           if (result.success) {
             setError(result.message);
             setAlertType("success");
@@ -241,7 +234,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
               </View>
               <View style={styles.productPriceContainer}>
                 <Text style={styles.secondaryTextSm}>Giá:</Text>
-                <Text style={styles.primaryTextSm}>{product?.price}$</Text>
+                <Text style={styles.primaryTextSm}>₫{product?.price}</Text>
               </View>
             </View>
             <View style={styles.productDescriptionContainer}>

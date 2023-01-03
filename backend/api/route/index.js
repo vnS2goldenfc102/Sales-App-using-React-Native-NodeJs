@@ -55,8 +55,8 @@ const routes = (app) => {
         .post(wishListController.addToWishlist)
     app.route("/wishlist/:id")
         .post(wishListController.wishlist)
-    app.route("/remove-from-wishlist/:id")
-        .get( wishListController.removeFromWishlist)
+    app.route("/remove-from-wishlist")
+        .delete( wishListController.removeFromWishlist)
     // CHECKOUT
     app.route("/checkout")
         .post(checkoutController.checkout)

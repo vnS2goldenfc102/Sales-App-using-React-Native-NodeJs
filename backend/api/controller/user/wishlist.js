@@ -6,14 +6,10 @@ module.exports.addToWishlist = async (req, res) => {
     try {
 
         const data = req.body
-        // let user = req.user
-        // console.log(data._id)
-        // const addToWishlist = await userModel.findByIdAndUpdate(data.id, { $push: { wishlist: data } },{new : true})
         const addToWishlist = await userModel.findOneAndUpdate({ _id: data.id }, { $push: { wishlist: data } }, { new: true })
-        // console.log(addToWishlist.data[0].wishlist)
         return res.json({
             success: true,
-            message: "product pushed in wishlist successfully",
+            message: "Đã thêm vào Wishlist",
             data: addToWishlist
         })
 
@@ -25,16 +21,21 @@ module.exports.addToWishlist = async (req, res) => {
 module.exports.removeFromWishlist = async (req, res) => {
     try {
 
-        const id = req.params.id
-        // let user = req.user
-        console.log(id)
-        const removeFromWishlist = await userModel.findOneAndUpdate({ _id: id }, { $pull: { wishlist: { productId: ObjectId(id) } } }, { new: true })
-        console.log(removeFromWishlist)
-        // const removeFromWishlist = await userModel.findOneAndDelete({ _id: id })
+        // const id = req.params.id
+        // // let user = req.user
+        // console.log(id)
+        // const removeFromWishlist = await userModel.findOneAndUpdate({ _id: id }, { $pull: { wishlist: { productId: ObjectId(id) } } }, { new: true })
+        // console.log(removeFromWishlist)
+        // // const removeFromWishlist = await userModel.findOneAndDelete({ _id: id })
+        const id = req.query.id // user
+        const index = req.query.index // wishlist
+        const user = await userModel.findById({ _id: id})
+        await user.wishlist.splice(index, 1)
+        await userModel.findByIdAndUpdate(id, { wishlist: user.wishlist })
         return res.json({
             success: true,
-            message: "product removed from wishlist successfully",
-            data: removeFromWishlist
+            message: "Đã xoá khỏi Wishlist",
+            // data: removeFromWishlist
         })
 
 
@@ -51,7 +52,7 @@ module.exports.wishlist = async (req, res) => {
         const wishlist = await userModel.findOne({ _id: _id })
             .populate("wishlist.productId")
             .select("-password -userType")
-        console.log(wishlist.wishlist, 'sadsadsad')
+        console.log(wishlist, 'sadsadsad')
         return res.json({
             success: true,
             message: "Wishlist",
