@@ -127,7 +127,7 @@ const CartScreen = ({ navigation }) => {
           </View>
           <View>
             <Text style={styles.cartBottomPrimaryText}>Tổng</Text>
-            <Text style={styles.cartBottomSecondaryText}>{totalPrice}$</Text>
+            <Text style={styles.cartBottomSecondaryText}>₫{totalPrice}</Text>
           </View>
         </View>
         <View style={styles.cartBottomRightContainer}>

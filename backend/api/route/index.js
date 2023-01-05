@@ -1,4 +1,6 @@
 // const studentController = require('../controller/index')
+const usersController = require('../controller/admin/users')
+const viewOrdersController = require('../controller/admin/orders')
 const accountController = require('../controller/auth/auth')
 const productController = require('../controller/products/products')
 const categoryController = require('../controller/categories/category')
@@ -34,9 +36,9 @@ const routes = (app) => {
     app.route("/products")
         .get(productController.getProducts)
     app.route("/update-product")
-        .post( productController.updateProduct)
+        .post(productController.updateProduct)
     app.route("/delete-product")
-        .get( productController.deleteProduct)
+        .get(productController.deleteProduct)
 
     // CATEGORIES
     app.route("/category")
@@ -44,21 +46,28 @@ const routes = (app) => {
     app.route("/categories")
         .get(categoryController.getCategories)
     app.route("/update-category")
-        .post( categoryController.updateCategory)
+        .post(categoryController.updateCategory)
     app.route("/delete-category")
-        .get( categoryController.deleteCategory)
+        .get(categoryController.deleteCategory)
     // ORDERS
     app.route("/orders/:id")
-        .get( orderController.orders)
+        .get(orderController.orders)
     // WISHLIST
     app.route("/add-to-wishlist")
         .post(wishListController.addToWishlist)
     app.route("/wishlist/:id")
         .post(wishListController.wishlist)
     app.route("/remove-from-wishlist")
-        .delete( wishListController.removeFromWishlist)
+        .delete(wishListController.removeFromWishlist)
     // CHECKOUT
     app.route("/checkout")
         .post(checkoutController.checkout)
+    // ADMIN
+    app.route("/admin/users")
+        .get(usersController.getUsers)
+    app.route("/admin/orders")
+        .get(viewOrdersController.getOrders)
+    app.route("/admin/order-status")
+        .get(viewOrdersController.getOrderStatus)
 }
 module.exports = routes

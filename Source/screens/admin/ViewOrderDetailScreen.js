@@ -27,9 +27,9 @@ const ViewOrderDetailScreen = ({ navigation, route }) => {
   const [value, setValue] = useState(null);
   const [statusDisable, setStatusDisable] = useState(false);
   const [items, setItems] = useState([
-    { label: "Pending", value: "pending" },
-    { label: "Shipped", value: "shipped" },
-    { label: "Delivered", value: "delivered" },
+    { label: "Chưa giải quyết", value: "chưa giải quyết" },
+    { label: "Đang vận chuyển", value: "đang vận chuyển" },
+    { label: "Đã giao hàng", value: "đã giao hàng" },
   ]);
 
   function tConvert(time) {
@@ -81,7 +81,7 @@ const ViewOrderDetailScreen = ({ navigation, route }) => {
       .then((response) => response.json())
       .then((result) => {
         if (result.success == true) {
-          setError(`Order status is successfully updated to ${value}`);
+          setError(`Trạng thái đơn hàng được cập nhật thành công thành ${value}`);
           setAlertType("success");
           setIsloading(false);
         }
@@ -214,8 +214,8 @@ const ViewOrderDetailScreen = ({ navigation, route }) => {
             ))}
           </ScrollView>
           <View style={styles.orderItemContainer}>
-            <Text style={styles.orderItemText}>Total</Text>
-            <Text>{totalCost}$</Text>
+            <Text style={styles.orderItemText}>Tổng</Text>
+            <Text>₫{totalCost}</Text>
           </View>
         </View>
         <View style={styles.emptyView}></View>
@@ -241,11 +241,11 @@ const ViewOrderDetailScreen = ({ navigation, route }) => {
         <View>
           {statusDisable == false ? (
             <CustomButton
-              text={"Update"}
+              text={"Cập nhật"}
               onPress={() => handleUpdateStatus(orderDetail?._id)}
             />
           ) : (
-            <CustomButton text={"Update"} disabled />
+            <CustomButton text={"Cập nhật"} disabled />
           )}
         </View>
       </View>

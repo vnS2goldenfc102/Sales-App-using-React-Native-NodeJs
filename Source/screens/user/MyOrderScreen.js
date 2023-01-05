@@ -65,13 +65,13 @@ const MyOrderScreen = ({ navigation, route }) => {
     var myHeaders = new Headers();
     let token = getToken(user);
     myHeaders.append("x-auth-token", token);
-
+    
     var requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
     };
-    console.log("sadsads", requestOptions);
+    
     setIsloading(true);
     fetch(`${network.serverip}/orders/${user._id}`, requestOptions)
       .then((response) => response.json())
@@ -83,6 +83,7 @@ const MyOrderScreen = ({ navigation, route }) => {
           setOrders(result.data);
           setError("");
         }
+        console.log(result.data);
         setIsloading(false);
       })
       .catch((error) => {

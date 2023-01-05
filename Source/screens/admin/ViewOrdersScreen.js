@@ -66,7 +66,7 @@ const ViewOrdersScreen = ({ navigation, route }) => {
     fetch(`${network.serverip}/admin/orders`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        if (result.success) {
+        if (result.status) {
           setOrders(result.data);
           setFoundItems(result.data);
           setError("");

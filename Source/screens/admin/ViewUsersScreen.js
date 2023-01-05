@@ -54,7 +54,7 @@ const ViewUsersScreen = ({ navigation, route }) => {
     fetch(`${network.serverip}/admin/users`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        if (result.success) {
+        if (result.status) {
           setUsers(result.data);
           setFoundItems(result.data);
           setError("");
@@ -80,6 +80,7 @@ const ViewUsersScreen = ({ navigation, route }) => {
     const keyword = filterItem;
     if (keyword !== "") {
       const results = users.filter((user) => {
+        // console.log(user.name)
         return user.name.toLowerCase().includes(keyword.toLowerCase());
       });
 

@@ -78,16 +78,16 @@ module.exports.checkAuth = async (req, res, next) => {
     try{
 
         let token = req.headers["x-auth-token"] || req.body.token || req.query.token;
-
+        console.log(token)
         if(token){
             try{
 
                 const decoded = jwt.verify(token,TOKEN_KEY)
                 req.user = decoded
-
+            
                 const user = await userModel.findOne({_id : decoded?._id})
                     .select("-password")
-
+                console.log(user,'la gi')
                 if(!user){
                     return res.send("Authentication failed")
                 }
