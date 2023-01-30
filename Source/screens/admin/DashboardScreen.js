@@ -135,7 +135,7 @@ const DashboardScreen = ({ navigation, route }) => {
         </View>
         <View style={styles.headingContainer}>
           <MaterialCommunityIcons name="menu-right" size={30} color="black" />
-          <Text style={styles.headingText}>Welcome, Admin</Text>
+          <Text style={styles.headingText}>Chào mừng, Admin</Text>
         </View>
         <View style={{ height: 370 }}>
           {data && (
@@ -165,12 +165,12 @@ const DashboardScreen = ({ navigation, route }) => {
         </View>
         <View style={styles.headingContainer}>
           <MaterialCommunityIcons name="menu-right" size={30} color="black" />
-          <Text style={styles.headingText}>Actions</Text>
+          <Text style={styles.headingText}>Hành động</Text>
         </View>
         <View style={{ flex: 1, width: "100%" }}>
           <ScrollView style={styles.actionContainer}>
             <OptionList
-              text={"Products"}
+              text={"Danh sách sản phẩm"}
               Icon={Ionicons}
               iconName={"md-square"}
               onPress={() =>
@@ -182,7 +182,7 @@ const DashboardScreen = ({ navigation, route }) => {
               type="morden"
             />
             <OptionList
-              text={"Categories"}
+              text={"Danh mục sản phẩm"}
               Icon={Ionicons}
               iconName={"menu"}
               onPress={() =>
@@ -194,7 +194,7 @@ const DashboardScreen = ({ navigation, route }) => {
               type="morden"
             />
             <OptionList
-              text={"Orders"}
+              text={"Danh sách đặt hàng"}
               Icon={Ionicons}
               iconName={"cart"}
               onPress={() =>
@@ -203,7 +203,7 @@ const DashboardScreen = ({ navigation, route }) => {
               type="morden"
             />
             <OptionList
-              text={"Users"}
+              text={"Danh sách khách hàng"}
               Icon={Ionicons}
               iconName={"person"}
               onPress={() =>

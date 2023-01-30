@@ -1,28 +1,53 @@
 const productModel = require("../../model/product")
 // sku,
-const HTTP = "http://192.168.1.71:3001/"
+const HTTP = "http://192.168.1.11:3001/"
+// module.exports.addProduct = async (req, res) => {
+//     try{
+
+//         // const {title, sku, price} = req.body;
+//         const title = req.body.title
+//         const sku = req.body.sku
+//         const price = req.body.price
+//         const quantity = req.body.quantity
+//         const category = req.body.category
+        
+
+
+//         const description = req.body.description
+        
+//         const file = req.file
+//         let image = HTTP + file.filename
+//         console.log(title, sku, price, quantity, category, description, image)
+        
+//         if(!title || !sku || !price) return res.send("Fields are empty")
+
+//         // let product = new productModel(req.body)
+//         // product.image = image
+//         // product.save()
+
+//         const product = await productModel.create({title: title, sku: sku, price: price, image: image, category: category, description: description, quantity: quantity })
+
+//         return res.json({
+//             success : true,
+//             message : "Product inserted successfully",
+//             data : product
+//         })
+
+//     }catch(error){
+//         return res.send(error.message)
+//     }
+// }
+
 module.exports.addProduct = async (req, res) => {
     try{
 
-        // const {title, sku, price} = req.body;
-        const title = req.body.title
-        const sku = req.body.sku
-        const price = req.body.price
-        const quantity = req.body.quantity
-        const category = req.body.category
+        const {title, sku, price, image} = req.body;
+        console.log(req.body)
 
-
-        const description = req.body.description
-        console.log(title, sku, price)
-        const file = req.file
-        let image = HTTP + file.filename
         if(!title || !sku || !price) return res.send("Fields are empty")
 
-        // let product = new productModel(req.body)
-        // product.image = image
-        // product.save()
-
-        const product = await productModel.create({title: title, sku: sku, price: price, image: image, category: category, description: description, quantity: quantity })
+        let product = new productModel(req.body)
+        product.save()
 
         return res.json({
             success : true,
@@ -60,12 +85,13 @@ module.exports.updateProduct = async (req, res) => {
 
         const {title, sku, price, image} = req.body;
         const {id} = req.query;
-
+        console.log(req.body)
+        console.log(id)
         // check if product exist with the given product id
         const product = await productModel.findOne({_id : id})
 
         if(product){
-            const updatedProduct = await productModel.findOneAndUpdate({_id : id}, req.body, {new :true})
+            const updatedProduct = await productModel.findByIdAndUpdate(id, req.body, {new :true})
 
             return res.json({
                 success : true,

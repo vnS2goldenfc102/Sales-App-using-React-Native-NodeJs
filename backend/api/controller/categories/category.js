@@ -1,5 +1,5 @@
 const categoryModel = require("../../model/category")
-
+const HTTP = "http://192.168.1.11:3001/"
 module.exports.addCategory = async (req, res) => {
     try{
 
@@ -7,15 +7,17 @@ module.exports.addCategory = async (req, res) => {
         // const title = req.body.title
         // const description = req.body.description
 
-        const file = req.file
-        let image = 'http://192.168.1.71:3001/' + file.filename
-
+        // const file = req.file
+        // let image = HTTP + file.filename
+        console.log(req.body)
         if(!title || !description) return res.send("Fields are empty")
+
+
 
         let category = new categoryModel(req.body)
         category.save()
 
-        // const category = await categoryModel.create({title: title, description: description, image: image})
+        // const category = await categoryModel.create({title, description, image})
 
 
         return res.json({
@@ -39,7 +41,7 @@ module.exports.getCategories = async (req, res) => {
             success : true,
             status : 400,
             message : "list of all categories",
-            categories,
+            data: categories,
             count : categoriesCount
         })
 

@@ -68,8 +68,8 @@ const AddProductScreen = ({ navigation, route }) => {
       .then((response) => response.json())
       .then((result) => {
         if (result.success) {
-          setCategories(result.categories);
-          result.categories.forEach((cat) => {
+          setCategories(result.data);
+          result.data.forEach((cat) => {
             let obj = {
               label: cat.title,
               value: cat._id,
@@ -98,16 +98,24 @@ const AddProductScreen = ({ navigation, route }) => {
     console.log("upload-F:", image);
 
     var formdata = new FormData();
-    formdata.append("photos", image, "product.png");
-
+    formdata.append('file', {
+      uri: image.uri,
+      type: 'image/jpeg',
+      name: 'my-image'
+    });
+    console.log(formdata, 'formdata')
     var ImageRequestOptions = {
       method: "POST",
       body: formdata,
       redirect: "follow",
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data'
+      }
     };
 
     fetch(
-      "https://192.168.43.230:3001/photos/upload",
+      network.serverip + "/upload",
       ImageRequestOptions
     )
       .then((response) => response.json())
@@ -117,20 +125,22 @@ const AddProductScreen = ({ navigation, route }) => {
       .catch((error) => console.log("error", error));
   };
 
-  var raw = JSON.stringify({
+
+  var form = JSON.stringify({
     title: title,
     sku: sku,
     price: price,
-    image: image,
+    image: image.uri,
     description: description,
     category: category,
     quantity: quantity,
   });
 
+
   var requestOptions = {
     method: "POST",
     headers: myHeaders,
-    body: raw,
+    body: form,
     redirect: "follow",
   };
 
@@ -145,24 +155,26 @@ const AddProductScreen = ({ navigation, route }) => {
 
     if (!result.cancelled) {
       console.log(result);
-      setImage(result.uri);
-      upload();
+      setImage(result);
     }
   };
 
   const addProductHandle = () => {
+    console.log(image)
+    console.log(form, 'form')
+    // upload();
     setIsloading(true);
     if (title == "") {
-      setError("Please enter the product title");
+      setError("Vui lòng nhập tiêu đề sản phẩm");
       setIsloading(false);
     } else if (price == 0) {
-      setError("Please enter the product price");
+      setError("Vui lòng nhập giá cả sản phẩm");
       setIsloading(false);
     } else if (quantity <= 0) {
-      setError("Quantity must be greater then 1");
+      setError("Số lượng phải lớn hơn 1");
       setIsloading(false);
     } else if (image == null) {
-      setError("Please upload the product image");
+      setError("Vui lòng tải lên 1 bức ảnh");
       setIsloading(false);
     } else {
       fetch(network.serverip + "/product", requestOptions)
@@ -209,10 +221,10 @@ const AddProductScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>Add Product</Text>
+          <Text style={styles.screenNameText}>Thêm Sản Phẩm</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>Add product details</Text>
+          <Text style={styles.screenNameParagraph}>Thêm chi tiết sản phẩm</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -225,7 +237,7 @@ const AddProductScreen = ({ navigation, route }) => {
             {image ? (
               <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
                 <Image
-                  source={{ uri: image }}
+                  source={{ uri: image.uri }}
                   style={{ width: 200, height: 200 }}
                 />
               </TouchableOpacity>
@@ -246,14 +258,14 @@ const AddProductScreen = ({ navigation, route }) => {
           <CustomInput
             value={title}
             setValue={setTitle}
-            placeholder={"Title"}
+            placeholder={"Tiêu đề"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
           <CustomInput
             value={price}
             setValue={setPrice}
-            placeholder={"Price"}
+            placeholder={"Giá"}
             keyboardType={"number-pad"}
             placeholderTextColor={colors.muted}
             radius={5}
@@ -261,7 +273,7 @@ const AddProductScreen = ({ navigation, route }) => {
           <CustomInput
             value={quantity}
             setValue={setQuantity}
-            placeholder={"Quantity"}
+            placeholder={"Số lượng"}
             keyboardType={"number-pad"}
             placeholderTextColor={colors.muted}
             radius={5}
@@ -269,28 +281,29 @@ const AddProductScreen = ({ navigation, route }) => {
           <CustomInput
             value={description}
             setValue={setDescription}
-            placeholder={"Description"}
+            placeholder={"Mô tả"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
         </View>
+        
       </ScrollView>
       <DropDownPicker
-        placeholder={"Select Product Category"}
-        open={open}
-        value={category}
-        items={items}
-        setOpen={setOpen}
-        setValue={setCategory}
-        setItems={setItems}
-        disabled={statusDisable}
-        disabledStyle={{
-          backgroundColor: colors.light,
-          borderColor: colors.white,
-        }}
-        labelStyle={{ color: colors.muted }}
-        style={{ borderColor: "#fff", elevation: 5 }}
-      />
+          placeholder={"Chọn danh mục sản phẩm"}
+          open={open}
+          value={category}
+          items={items}
+          setOpen={setOpen}
+          setValue={setCategory}
+          setItems={setItems}
+          disabled={statusDisable}
+          disabledStyle={{
+            backgroundColor: colors.light,
+            borderColor: colors.white,
+          }}
+          labelStyle={{ color: colors.muted }}
+          style={{ borderColor: "#fff", elevation: 5 }}
+        />
       <View style={styles.buttomContainer}>
         <CustomButton text={"Add Product"} onPress={addProductHandle} />
       </View>

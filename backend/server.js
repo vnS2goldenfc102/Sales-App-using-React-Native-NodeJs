@@ -21,20 +21,19 @@ const storage = multer.diskStorage({
     cb(null, 'media')
   },
   filename: function (req, file, cb) {
-    let uploadFile = file.originalname.split('.')
-    let name = `${uploadFile[0]}-${Date.now()}.${uploadFile[uploadFile.length-1]}`
-    cb(null, name)
+    cb(null, Date.now() + "-" + Math.round(Math.random() * 1e9) + "-" + file.originalname );
   }
 })
 
-const upload = multer({ storage: storage }).single()
+const upload = multer({ storage }).single('file')
 app.use(upload)
 app.use(express.static('media'))
 app.use(cors({}))
 app.use(bodyParser.json());
 
 var routes = require('./api/route');
-routes(app);
+routes(app, upload);
+
 
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})

@@ -17,6 +17,7 @@ import CustomAlert from "../../components/CustomAlert/CustomAlert";
 import * as ImagePicker from "expo-image-picker";
 import ProgressDialog from "react-native-progress-dialog";
 import { AntDesign } from "@expo/vector-icons";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const EditProductScreen = ({ navigation, route }) => {
   const { product, authUser } = route.params;
@@ -29,16 +30,73 @@ const EditProductScreen = ({ navigation, route }) => {
   const [error, setError] = useState("");
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
+  const [user, setUser] = useState({});
   const [category, setCategory] = useState("garments");
+  const [categories, setCategories] = useState([]);
   const [alertType, setAlertType] = useState("error");
+  const [open, setOpen] = useState(false);
+  const [items, setItems] = useState([
+    { label: "Pending", value: "pending" },
+    { label: "Shipped", value: "shipped" },
+    { label: "Delivered", value: "delivered" },
+  ]);
+  const [statusDisable, setStatusDisable] = useState(false);
+  var payload = [];
 
+  const getToken = (obj) => {
+    try {
+      setUser(JSON.parse(obj));
+    } catch (e) {
+      setUser(obj);
+      return obj.token;
+    }
+    return JSON.parse(obj).token;
+  };
+
+  const fetchCategories = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("x-auth-token", getToken(authUser));
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+    setIsloading(true);
+    fetch(`${network.serverip}/categories`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          setCategories(result.data);
+          result.data.forEach((cat) => {
+            let obj = {
+              label: cat.title,
+              value: cat._id,
+            };
+            payload.push(obj);
+          });
+          setItems(payload);
+          setError("");
+        } else {
+          setError(result.message);
+        }
+        setIsloading(false);
+      })
+      .catch((error) => {
+        setIsloading(false);
+        setError(error.message);
+        console.log("error", error);
+      });
+  };
   useEffect(() => {
-    setImage(`${network.serverip}/uploads/${product?.image}`);
+    setImage(product?.image);
     setTitle(product.title);
     setSku(product.sku);
     setQuantity(product.quantity.toString());
     setPrice(product.price.toString());
     setDescription(product.description);
+    setCategory(product.category);
+    fetchCategories();
   }, []);
 
   var myHeaders = new Headers();
@@ -54,7 +112,7 @@ const EditProductScreen = ({ navigation, route }) => {
     category: category,
     quantity: quantity,
   });
-
+  console.log(raw, 'raw')
   var requestOptions = {
     method: "POST",
     headers: myHeaders,
@@ -196,7 +254,24 @@ const EditProductScreen = ({ navigation, route }) => {
             radius={5}
           />
         </View>
+        <DropDownPicker
+        placeholder={"Select Product Category"}
+        open={open}
+        value={category}
+        items={items}
+        setOpen={setOpen}
+        setValue={setCategory}
+        setItems={setItems}
+        disabled={statusDisable}
+        disabledStyle={{
+          backgroundColor: colors.light,
+          borderColor: colors.white,
+        }}
+        labelStyle={{ color: colors.muted }}
+        style={{ borderColor: "#fff", elevation: 5 }}
+      />
       </ScrollView>
+      
       <View style={styles.buttomContainer}>
         <CustomButton text={"Edit Product"} onPress={editProductHandle} />
       </View>

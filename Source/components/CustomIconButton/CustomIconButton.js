@@ -5,6 +5,7 @@ import garmentsIcon from "../../assets/icons/garments.png";
 
 const CustomIconButton = ({ text, image, onPress, active }) => {
   return (
+    
     <TouchableOpacity
       style={[
         styles.container,
@@ -12,7 +13,7 @@ const CustomIconButton = ({ text, image, onPress, active }) => {
       ]}
       onPress={onPress}
     >
-      <Image source={image} style={styles.buttonIcon} />
+      <Image source={{uri: image}} style={styles.buttonIcon} />
       <Text
         style={[
           styles.buttonText,
@@ -21,6 +22,7 @@ const CustomIconButton = ({ text, image, onPress, active }) => {
       >
         {text}
       </Text>
+      
     </TouchableOpacity>
   );
 };

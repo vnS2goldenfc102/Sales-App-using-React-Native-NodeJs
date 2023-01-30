@@ -8,7 +8,9 @@ const orderController = require('../controller/user/orders')
 const wishListController = require('../controller/user/wishlist')
 const checkoutController = require('../controller/user/cart')
 const auth = require('../middleware/jwt')
-const routes = (app) => {
+let fs = require('fs')
+
+const routes = (app, upload) => {
     // app.route('/student/:id')
     //     .delete(auth.verify,auth.role,studentController.deleteStudent)
     //     .put(auth.verify,auth.role,studentController.updateStudent)
@@ -69,5 +71,14 @@ const routes = (app) => {
         .get(viewOrdersController.getOrders)
     app.route("/admin/order-status")
         .get(viewOrdersController.getOrderStatus)
+    // HELPER
+    app.post('/upload', (req, res) => {
+        console.log(req.file);
+        fs.rename(req.file.path, req.file.path + ".jpg", () => {
+            res.send('File uploaded!');
+        })
+      });
+      
+
 }
 module.exports = routes

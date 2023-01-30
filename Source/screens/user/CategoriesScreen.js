@@ -27,6 +27,7 @@ const CategoriesScreen = ({ navigation, route }) => {
 
   const [isLoading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const [category, setCategories] = useState([]);
   const [refeshing, setRefreshing] = useState(false);
   const [label, setLabel] = useState("Loading...");
   const [error, setError] = useState("");
@@ -56,7 +57,7 @@ const CategoriesScreen = ({ navigation, route }) => {
     setRefreshing(false);
   };
 
-  const category = [
+  const categorys = [
     {
       _id: "62fe244f58f7aa8230817f89",
       title: "May mặc",
@@ -78,7 +79,33 @@ const CategoriesScreen = ({ navigation, route }) => {
       image: require("../../assets/icons/grocery.png"),
     },
   ];  
-  const [selectedTab, setSelectedTab] = useState(category[0]);
+  
+  const [selectedTab, setSelectedTab] = useState({});
+  const fetchCategory = () => {
+    var headerOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch(`${network.serverip}/categories`, headerOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          setCategories(result.data);
+          // setFoundItems(result.data);
+          setError("");
+          setSelectedTab(result.data[0])
+          fetchProduct();
+          console.log(result.data, 'sadas')
+          
+        } else {
+          setError(result.message);
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log("error", error);
+      });
+  };
 
   const fetchProduct = () => {
     var headerOptions = {
@@ -90,8 +117,8 @@ const CategoriesScreen = ({ navigation, route }) => {
       .then((result) => {
         if (result.success) {
           setProducts(result.data);
-          setFoundItems(result.data);
           setError("");
+          setFoundItems(result.data);
         } else {
           setError(result.message);
         }
@@ -126,9 +153,9 @@ const CategoriesScreen = ({ navigation, route }) => {
   }, [filterItem]);
 
   useEffect(() => {
-    fetchProduct();
+    fetchCategory();
   }, []);
-
+  
   return (
     <View style={styles.container}>
       <StatusBar></StatusBar>
@@ -190,7 +217,7 @@ const CategoriesScreen = ({ navigation, route }) => {
         />
 
         {foundItems.filter(
-          (product) => product?.category === selectedTab?._id
+          (product) => product?.category 
         ).length === 0 ? (
           <View style={styles.noItemContainer}>
             <View
@@ -216,7 +243,7 @@ const CategoriesScreen = ({ navigation, route }) => {
         ) : (
           <FlatList
             data={foundItems.filter(
-              (product) => product?.category === selectedTab?._id
+              (product) => product?.category === selectedTab._id
             )}
             refreshControl={
               <RefreshControl

@@ -116,8 +116,8 @@ const ViewCategoryScreen = ({ navigation, route }) => {
       .then((response) => response.json())
       .then((result) => {
         if (result.success) {
-          setCategories(result.categories);
-          setFoundItems(result.categories);
+          setCategories(result.data);
+          setFoundItems(result.data);
           setError("");
         } else {
           setError(result.message);
@@ -202,7 +202,7 @@ const ViewCategoryScreen = ({ navigation, route }) => {
         ) : (
           foundItems.map((item, index) => (
             <CategoryList
-              icon={`${network.serverip}/uploads/${item?.icon}`}
+              icon={item?.image}
               key={index}
               title={item?.title}
               description={item?.description}

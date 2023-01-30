@@ -24,7 +24,7 @@ import * as actionCreaters from "../../states/actionCreaters/actionCreaters";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { SliderBox } from "react-native-image-slider-box";
 
-const category = [
+const categorys = [
   {
     _id: "62fe244f58f7aa8230817f89",
     title: "May mặc",
@@ -65,6 +65,9 @@ const HomeScreen = ({ navigation, route }) => {
   const [error, setError] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [searchItems, setSearchItems] = useState([]);
+  const [selectedTab, setSelectedTab] = useState({});
+  const [category, setCategories] = useState([]);
+
 
   const convertToJSON = (obj) => {
     try {
@@ -87,6 +90,32 @@ const HomeScreen = ({ navigation, route }) => {
     redirect: "follow",
   };
 
+  const fetchCategory = () => {
+    var headerOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch(`${network.serverip}/categories`, headerOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          setCategories(result.data);
+          // setFoundItems(result.data);
+          setError("");
+          // setSelectedTab(result.data[0])
+          // fetchProduct();
+          console.log(result.data, 'sadas')
+          
+        } else {
+          setError(result.message);
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log("error", error);
+      });
+  };
+  
   const fetchProduct = () => {
     fetch(`${network.serverip}/products`, headerOptions)
       .then((response) => response.json())
@@ -117,10 +146,10 @@ const HomeScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
+    fetchCategory();
     convertToJSON(user);
     fetchProduct();
   }, []);
-
   return (
     <View style={styles.container}>
       <StatusBar></StatusBar>

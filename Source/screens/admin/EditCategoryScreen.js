@@ -28,6 +28,22 @@ const EditCategoryScreen = ({ navigation, route }) => {
   const [alertType, setAlertType] = useState("error");
   const [user, setUser] = useState({});
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.5,
+    });
+
+    if (!result.cancelled) {
+      console.log(result);
+      setImage(result.uri);
+      // upload();
+    }
+  };
+
   const editCategoryHandle = (id) => {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", authUser.token);
@@ -80,6 +96,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     setTitle(category?.title);
+    setImage(category?.image);
     setDescription(category?.description);
   }, []);
 
@@ -115,6 +132,20 @@ const EditCategoryScreen = ({ navigation, route }) => {
         style={{ flex: 1, width: "100%" }}
       >
         <View style={styles.formContainer}>
+          <View style={styles.imageContainer}>
+            {image ? (
+              <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
+                <Image
+                  source={{ uri: image }}
+                  style={{ width: 200, height: 200 }}
+                />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
+                <AntDesign name="pluscircle" size={50} color={colors.muted} />
+              </TouchableOpacity>
+            )}
+          </View>
           <CustomInput
             value={title}
             setValue={setTitle}

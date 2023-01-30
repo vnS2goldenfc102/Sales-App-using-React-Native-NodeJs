@@ -39,6 +39,49 @@ const AddCategoryScreen = ({ navigation, route }) => {
     }
     return JSON.parse(obj).token;
   };
+  
+  const upload = async () => {
+    console.log("upload-F:", image);
+
+    var formdata = new FormData();
+    formdata.append("photos", image, "product.png");
+
+    var ImageRequestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data'
+      }
+    };
+
+    fetch(
+      network.serverip + "/media",
+      ImageRequestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.5,
+    });
+
+    if (!result.cancelled) {
+      console.log(result);
+      setImage(result.uri);
+      // upload();
+    }
+  };
 
   const addCategoryHandle = () => {
     var myHeaders = new Headers();
@@ -122,6 +165,20 @@ const AddCategoryScreen = ({ navigation, route }) => {
         style={{ flex: 1, width: "100%" }}
       >
         <View style={styles.formContainer}>
+          <View style={styles.imageContainer}>
+            {image ? (
+              <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
+                <Image
+                  source={{ uri: image }}
+                  style={{ width: 200, height: 200 }}
+                />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
+                <AntDesign name="pluscircle" size={50} color={colors.muted} />
+              </TouchableOpacity>
+            )}
+          </View>
           <CustomInput
             value={title}
             setValue={setTitle}

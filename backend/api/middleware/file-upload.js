@@ -5,7 +5,7 @@ module.exports.uploadFile = async (req, res, next) => {
         console.log("DSf")
         const storage = multer.diskStorage({
             destination: function (req, file, cb) {
-              cb(null, 'public/storage/')
+              cb(null, 'media')
             },
             filename: function (req, file, cb) {
               let uploadFile = file.originalname.split('.')
