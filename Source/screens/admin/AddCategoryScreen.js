@@ -103,13 +103,13 @@ const AddCategoryScreen = ({ navigation, route }) => {
 
     setIsloading(true);
     if (title == "") {
-      setError("Please enter the product title");
+      setError("Vui lòng nhập tiêu đề sản phẩm");
       setIsloading(false);
     } else if (description == "") {
-      setError("Please upload the product image");
+      setError("Vui lòng nhập mô tả danh mục");
       setIsloading(false);
     } else if (image == null) {
-      setError("Please upload the Catergory image");
+      setError("Vui lòng tải lên hình ảnh Danh mục");
       setIsloading(false);
     } else {
       fetch(network.serverip + "/category", requestOptions)
@@ -121,7 +121,7 @@ const AddCategoryScreen = ({ navigation, route }) => {
             setAlertType("success");
             setError(result.message);
             setTitle("");
-            setDescription("");
+            setDescription(""); 
           }
         })
         .catch((error) => {
@@ -153,10 +153,10 @@ const AddCategoryScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>Add Category</Text>
+          <Text style={styles.screenNameText}>Thêm Danh Mục</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>Add category details</Text>
+          <Text style={styles.screenNameParagraph}>Thêm chi tiết danh mục</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -182,7 +182,7 @@ const AddCategoryScreen = ({ navigation, route }) => {
           <CustomInput
             value={title}
             setValue={setTitle}
-            placeholder={"Title"}
+            placeholder={"Tiêu đề"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
@@ -190,7 +190,7 @@ const AddCategoryScreen = ({ navigation, route }) => {
           <CustomInput
             value={description}
             setValue={setDescription}
-            placeholder={"Description"}
+            placeholder={"Mô tả"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
@@ -198,7 +198,7 @@ const AddCategoryScreen = ({ navigation, route }) => {
       </ScrollView>
 
       <View style={styles.buttomContainer}>
-        <CustomButton text={"Add Category"} onPress={addCategoryHandle} />
+        <CustomButton text={"Thêm Danh Mục"} onPress={addCategoryHandle} />
       </View>
     </KeyboardAvoidingView>
   );

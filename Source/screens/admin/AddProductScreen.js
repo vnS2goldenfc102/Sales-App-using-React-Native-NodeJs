@@ -305,7 +305,7 @@ const AddProductScreen = ({ navigation, route }) => {
           style={{ borderColor: "#fff", elevation: 5 }}
         />
       <View style={styles.buttomContainer}>
-        <CustomButton text={"Add Product"} onPress={addProductHandle} />
+        <CustomButton text={"Thêm sản phẩm"} onPress={addProductHandle} />
       </View>
     </KeyboardAvoidingView>
   );

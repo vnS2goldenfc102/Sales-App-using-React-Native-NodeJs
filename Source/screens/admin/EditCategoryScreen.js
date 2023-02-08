@@ -120,10 +120,10 @@ const EditCategoryScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>Edit Category</Text>
+          <Text style={styles.screenNameText}>Chỉnh sửa Danh Mục</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>Add Edit details</Text>
+          <Text style={styles.screenNameParagraph}>Thêm chi tiết</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -149,7 +149,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
           <CustomInput
             value={title}
             setValue={setTitle}
-            placeholder={"Title"}
+            placeholder={"Tiêu đề"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
@@ -157,7 +157,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
           <CustomInput
             value={description}
             setValue={setDescription}
-            placeholder={"Description"}
+            placeholder={"Mô tả"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
@@ -166,7 +166,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
 
       <View style={styles.buttomContainer}>
         <CustomButton
-          text={"Edit Category"}
+          text={"Chỉnh sửa danh mục"}
           onPress={() => {
             editCategoryHandle(category?._id);
           }}

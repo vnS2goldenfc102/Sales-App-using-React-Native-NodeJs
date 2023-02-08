@@ -177,10 +177,10 @@ const ViewCategoryScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>View Categories</Text>
+          <Text style={styles.screenNameText}>Xem Danh Mục</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>View all Categories</Text>
+          <Text style={styles.screenNameParagraph}>Xem tất cả Danh mục</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -198,7 +198,7 @@ const ViewCategoryScreen = ({ navigation, route }) => {
         }
       >
         {foundItems && foundItems.length == 0 ? (
-          <Text>{`No category found with the title of ${filterItem}!`}</Text>
+          <Text>{`Không tìm thấy danh mục nào với tiêu đề ${filterItem} !`}</Text>
         ) : (
           foundItems.map((item, index) => (
             <CategoryList

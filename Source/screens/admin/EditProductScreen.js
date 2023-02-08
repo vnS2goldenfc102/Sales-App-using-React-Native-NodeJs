@@ -193,10 +193,10 @@ const EditProductScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>Edit Product</Text>
+          <Text style={styles.screenNameText}>Chỉnh sửa Sản Phẩm</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>Edit product details</Text>
+          <Text style={styles.screenNameParagraph}>Chỉnh sửa chi tiết sản phẩm</Text>
         </View>
       </View>
       <CustomAlert message={error} type={"error"} />
@@ -226,14 +226,14 @@ const EditProductScreen = ({ navigation, route }) => {
           <CustomInput
             value={title}
             setValue={setTitle}
-            placeholder={"Title"}
+            placeholder={"Tiêu đề"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
           <CustomInput
             value={price}
             setValue={setPrice}
-            placeholder={"Price"}
+            placeholder={"Giá"}
             keyboardType={"number-pad"}
             placeholderTextColor={colors.muted}
             radius={5}
@@ -241,7 +241,7 @@ const EditProductScreen = ({ navigation, route }) => {
           <CustomInput
             value={quantity}
             setValue={setQuantity}
-            placeholder={"Quantity"}
+            placeholder={"Số lượng"}
             keyboardType={"number-pad"}
             placeholderTextColor={colors.muted}
             radius={5}
@@ -249,13 +249,13 @@ const EditProductScreen = ({ navigation, route }) => {
           <CustomInput
             value={description}
             setValue={setDescription}
-            placeholder={"Description"}
+            placeholder={"Mô tả"}
             placeholderTextColor={colors.muted}
             radius={5}
           />
         </View>
         <DropDownPicker
-        placeholder={"Select Product Category"}
+        placeholder={"Lựa chọn danh mục"}
         open={open}
         value={category}
         items={items}
@@ -273,7 +273,7 @@ const EditProductScreen = ({ navigation, route }) => {
       </ScrollView>
       
       <View style={styles.buttomContainer}>
-        <CustomButton text={"Edit Product"} onPress={editProductHandle} />
+        <CustomButton text={"Chỉnh sửa sản phẩm"} onPress={editProductHandle} />
       </View>
     </KeyboardAvoidingView>
   );

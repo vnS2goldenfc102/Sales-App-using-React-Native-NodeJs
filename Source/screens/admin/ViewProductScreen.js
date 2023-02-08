@@ -74,17 +74,17 @@ const ViewProductScreen = ({ navigation, route }) => {
 
   const showConfirmDialog = (id) => {
     return Alert.alert(
-      "Are your sure?",
-      "Are you sure you want to delete the category?",
+      "Bạn có chắc không?",
+      "Bạn có chắc chắn muốn xóa danh mục?",
       [
         {
-          text: "Yes",
+          text: "Có",
           onPress: () => {
             handleDelete(id);
           },
         },
         {
-          text: "No",
+          text: "Không",
         },
       ]
     );
@@ -157,10 +157,10 @@ const ViewProductScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>View Product</Text>
+          <Text style={styles.screenNameText}>Xem Sản Phẩm</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>View all products</Text>
+          <Text style={styles.screenNameParagraph}>Xem tất cả sản phẩm</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -178,7 +178,7 @@ const ViewProductScreen = ({ navigation, route }) => {
         }
       >
         {foundItems && foundItems.length == 0 ? (
-          <Text>{`No product found with the name of ${filterItem}!`}</Text>
+          <Text>{`Không tìm thấy sản phẩm nào có tên ${filterItem}!`}</Text>
         ) : (
           foundItems.map((product, index) => {
             return (
@@ -190,7 +190,7 @@ const ViewProductScreen = ({ navigation, route }) => {
                 price={product?.price}
                 qantity={product?.sku}
                 onPressView={() => {
-                  console.log("view is working " + product._id);
+                  console.log("chế độ xem đang hoạt động " + product._id);
                 }}
                 onPressEdit={() => {
                   navigation.navigate("editproduct", {

@@ -121,10 +121,10 @@ const ViewUsersScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>View Users</Text>
+          <Text style={styles.screenNameText}>Xem Danh Sách Người Dùng</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>View all Users</Text>
+          <Text style={styles.screenNameParagraph}>Xem tất cả người dùng</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -142,7 +142,7 @@ const ViewUsersScreen = ({ navigation, route }) => {
         }
       >
         {foundItems && foundItems.length == 0 ? (
-          <Text>{`No user found with the name of ${filterItem}!`}</Text>
+          <Text>{`Không tìm thấy người dùng nào có tên là ${filterItem} !`}</Text>
         ) : (
           foundItems.map((item, index) => (
             <UserList

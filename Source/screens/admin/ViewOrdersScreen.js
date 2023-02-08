@@ -121,16 +121,16 @@ const ViewOrdersScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.screenNameContainer}>
         <View>
-          <Text style={styles.screenNameText}>View Order</Text>
+          <Text style={styles.screenNameText}>Xem Đơn Đặt Hàng</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>View all orders</Text>
+          <Text style={styles.screenNameParagraph}>Xem tất cả các đơn đặt hàng</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
       <CustomInput
         radius={5}
-        placeholder={"Search..."}
+        placeholder={"Tìm kiếm..."}
         value={filterItem}
         setValue={setFilterItem}
       />
@@ -142,7 +142,7 @@ const ViewOrdersScreen = ({ navigation, route }) => {
         }
       >
         {foundItems && foundItems.length == 0 ? (
-          <Text>{`No order found with the order # ${filterItem}!`}</Text>
+          <Text>{`Không tìm thấy đơn hàng nào với đơn hàng # ${filterItem} !`}</Text>
         ) : (
           foundItems.map((order, index) => {
             return (
